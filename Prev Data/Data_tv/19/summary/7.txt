@@ -1,2 +1,0 @@
- Ten short ways to concatenation
-

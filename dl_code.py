@@ -4,7 +4,7 @@ Created on Thu Mar  7 11:30:32 2019
 
 @author: Sahil
 """
-import matplotlib.pyplot as plt
+
 import numpy as np
 import pandas as pd
 import csv
@@ -43,17 +43,27 @@ def create_dataset(folder_name,type_rev):
                     except:
                         print("{0} {1} {2} ".format(j,i,len(df)))
                         break
-# Review type 1: Movie 2: TV
+                    
+# Review type 1: TV 2: MOVIES
 create_dataset("tv_250",1)
 create_dataset("movies_250",2)
 
 data_tv = pd.read_csv("tv_250.csv",header=None,encoding="latin-1")
 data_movies = pd.read_csv("movies_250.csv",header=None,encoding="latin-1")
 
-data = np.concatenate((data_tv,data_movies))
+data = pd.concat([data_tv, data_movies])
 # Reviews
-reviews = data.iloc[:,2].values
+reviews = data.iloc[:,3].values
+for i in range(len(reviews)):
+    with open("final_data/reviews.txt","a",encoding="latin-1") as f:
+        f.writelines(reviews[i]+"\n")
+
 # Labels
-labels = data.iloc[:,3].values
+labels = data.iloc[:,4].values
+for i in range(len(labels)):
+    with open("final_data/labels.txt","a") as f:
+        f.writelines(labels[i]+"\n")
+
+
 
 
